@@ -9,6 +9,21 @@ const Mutations = {
        // info makes sure that item is returned to us, gives the queyr to the backend
        console.log(item);
        return item; 
+    },
+    updateItem(parent, args, ctx, info){
+        const updates = {...args};
+        // don't want to update the id property, so you remove it
+        delete updates.id;
+
+        return ctx.db.mutation.updateItem(
+            {
+                data: updates, 
+                where:{
+                    id: args.id
+                }
+            }, 
+            info
+        )
     }
 };
 
