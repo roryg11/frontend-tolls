@@ -2,7 +2,7 @@
     import PaginationStyles from "./styles/PaginationStyles";
     import { Query } from "react-apollo";
     import gql from "graphql-tag";
-    import {perPage} from "../config.js" 
+    import { perPage } from "../config.js" 
     import Link from "next/link";
     import Head from "next/head";
 
@@ -28,23 +28,21 @@
                                 <Head>
                                     <title>Sick Fits | {this.props.page} of {pages}</title>
                                 </Head>
-                                <Link href={
-                                    {
+                                <Link prefetch
+                                href={{
                                         pathName: "/items",
                                         query: {
                                             page: this.props.page -1
                                         }
-                                    }
-                                }>Prev</Link>
+                                    }}>Prev</Link>
                                 <p>{this.props.page} of {pages}</p>
-                                <Link href={
-                                    {
+                                <Link prefetch
+                                href={{
                                         pathName: "/items",
                                         query: {
                                             page: this.props.page + 1
                                         }
-                                    }
-                                }>Next</Link>
+                                    }}>Next</Link>
                             </PaginationStyles>);
 
                         } }
