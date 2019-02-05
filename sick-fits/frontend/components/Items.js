@@ -44,7 +44,6 @@ class Items extends Component {
                         first: perPage
                     }}>
                     {({data, error, loading}) => {
-                        console.log(data);
                         if(loading) return <p>LOADING</p>
                         if(error) return <p>ERROR</p>
                         return <ItemsList>
