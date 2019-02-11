@@ -28,7 +28,6 @@ const permissions = [
 class User extends Component {
     render(){
         const user = this.props.user;
-        console.log(user);
         return (<tr key={user.id}>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
