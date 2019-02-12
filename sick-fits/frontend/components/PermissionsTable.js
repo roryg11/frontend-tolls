@@ -58,7 +58,7 @@ class UserPermission extends Component {
         if(e.target.checked){
             updatedPermissions.push(e.target.value);
         } else {
-            updatedPermissions = updatedPermissions.filter(permission => permision !== e.target.value);
+            updatedPermissions = updatedPermissions.filter(permission => permission !== e.target.value);
         }
         this.setState({permissions: updatedPermissions});
     }
