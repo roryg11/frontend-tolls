@@ -62,7 +62,7 @@ class UserPermission extends Component {
                     { permissions.map((userPermission) => {
                         return (<td key={userPermission}>
                                     <label htmlFor={`${user.id}-permission-${userPermission}`}>
-                                        <input type="checkbox" value={userPermission} onChange={this.onCheckBoxChange}/>
+                                        <input id={`${user.id}-permission-${userPermission}`} type="checkbox" value={userPermission} onChange={this.onCheckBoxChange}/>
                                     </label>
                                 </td>);
                     })}
