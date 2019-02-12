@@ -17,6 +17,19 @@ const ALL_USERS_QUERY = gql`
     }
 `;
 
+const UPDATE_PERMISSIONS_MUTATION = gql`
+    mutation UPDATE_PERMISSIONS_MUTATION (
+        $permissions: [Permission]!,
+        $userId: ID!
+    ) {
+        updatePermissions(permissions: $permissions, userId: $userId){
+            name
+            email 
+            permissions
+        }
+    }
+`;
+
 const permissions = [
     "ADMIN",
     "USER",
@@ -37,8 +50,6 @@ class UserPermission extends Component {
     }
 
     state = {
-        name: this.props.user.name,
-        email: this.props.user.email,
         permissions: this.props.user.permissions
     }
 
@@ -46,30 +57,41 @@ class UserPermission extends Component {
         let updatedPermissions = [...this.state.permissions];
         if(e.target.checked){
             updatedPermissions.push(e.target.value);
-            this.setState({permissions: updatedPermissions});
         } else {
-            const indexOfPerm = updatedPermissions.indexOf(e.target.value);
-            updatedPermissions = updatedPermissions.splice(1, indexOfPerm);
-            this.setState({permissions: updatedPermissions});
+            updatedPermissions = updatedPermissions.filter(permission => permision !== e.target.value);
         }
+        this.setState({permissions: updatedPermissions});
     }
 
     render(){
         const user = this.props.user;
-        return (<tr key={user.id}>
+        return (<Mutation mutation={UPDATE_PERMISSIONS_MUTATION} variables={ {permissions: this.state.permissions, userId: this.props.user.id} }>
+            { (updatePermissions, {error, loading})=>{
+                if(error) <Error error={error}/>;
+                if(loading) <p>Loading...</p>;
+                return(
+                    <tr key={user.id}>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     { permissions.map((userPermission) => {
                         return (<td key={userPermission}>
                                     <label htmlFor={`${user.id}-permission-${userPermission}`}>
-                                        <input id={`${user.id}-permission-${userPermission}`} type="checkbox" value={userPermission} onChange={this.onCheckBoxChange}/>
+                                        <input id={`${user.id}-permission-${userPermission}`} 
+                                        type="checkbox" 
+                                        value={userPermission}
+                                        checked={this.state.permissions.includes(userPermission)} 
+                                        onChange={this.onCheckBoxChange}/>
                                     </label>
                                 </td>);
                     })}
                     <td>
-                        <SickButton>Update</SickButton>
+                        <SickButton type="button" disabled={loading} onClick={updatePermissions}>Update</SickButton>
                     </td>
-                </tr>);
+                    </tr>
+                )
+            }}
+        </Mutation>
+        );
     }
 };
 
