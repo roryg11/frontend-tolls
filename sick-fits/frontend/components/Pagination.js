@@ -34,7 +34,7 @@
                                         query: {
                                             page: this.props.page -1
                                         }
-                                    }}>Prev</Link>
+                                    }}><a>Prev</a></Link>
                                 <p>{this.props.page} of {pages}</p>
                                 <Link prefetch
                                 href={{
@@ -42,7 +42,7 @@
                                         query: {
                                             page: this.props.page + 1
                                         }
-                                    }}>Next</Link>
+                                    }}><a>Next</a></Link>
                             </PaginationStyles>);
 
                         } }
