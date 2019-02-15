@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import formatMoney from "../lib/formatMoney";
+import RemoveFromCart from "./RemoveFromCart";
 
 const CartStyles = styled.li`
     padding: 1rem 0;
@@ -30,7 +31,7 @@ const CartItem = props => {
                     </em>
                 </p>
             </div>
-
+            <RemoveFromCart id={cartItem.id}/>
         </CartStyles>
     )
 }

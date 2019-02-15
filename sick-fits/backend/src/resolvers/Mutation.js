@@ -230,6 +230,30 @@ const Mutations = {
             }, info);
             return newCartItem; 
         }
+    },
+    async removeFromCart(parent, args, ctx, info){
+        // find cart item
+        const cartItem = await ctx.db.query.cartItem({
+            where: {
+                id: args.id
+            }
+        }, `{ id, user {id} }`);
+        if(!cartItem){
+            throw new Error("This item is no longer available!");
+        }
+
+        // check that user owns cart item
+        const userOwnsItem = cartItem.user.id === ctx.request.userId; 
+        
+        if(!userOwnsItem) {
+            throw new Error("You do not have permission to do this");
+        }
+
+        return await ctx.db.mutation.deleteCartItem({
+            where: {
+                id: args.id
+            }
+        }, info);
     }
 };
 
