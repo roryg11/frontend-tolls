@@ -19,7 +19,7 @@ const ItemsList = styled.div`
 `
 
 const ALL_ITEMS_QUERY = gql`
-    query ALL_ITEMS_QUERY($skip: Int =0, $first: Int = ${perPage}) {
+    query ALL_ITEMS_QUERY($skip: Int=1, $first: Int=${perPage}) {
         items(first: $first, skip: $skip, orderBy: createdAt_DESC) {
             id
             title
@@ -34,13 +34,14 @@ const ALL_ITEMS_QUERY = gql`
 
 class Items extends Component {
     render() {
+        const page = this.props.page || 1;
         return (
             <Center>
                 <p>Items</p>
-                <Pagination page={parseFloat(this.props.page)}/>
+                <Pagination page={parseFloat(page)}/>
                 <Query query={ALL_ITEMS_QUERY} 
                     variables={{
-                        skip: this.props.page * perPage - perPage,
+                        skip: page * perPage - perPage,
                         first: perPage
                     }}>
                     {({data, error, loading}) => {
@@ -53,7 +54,7 @@ class Items extends Component {
                         </ItemsList>
                     }}
                 </Query>
-                <Pagination page={parseFloat(this.props.page)}/>
+                <Pagination page={parseFloat(page)}/>
             </Center>
         );
     }
