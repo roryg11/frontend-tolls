@@ -9,14 +9,14 @@ const SingleItemStyles = styled.div`
     max-width: 1200px;
     margin: 2rem auto;
     box-shadow: ${props=> props.theme.bs};
-    display;grid;
-    grid-auto-colums: 1fr;
+    display:grid;
+    grid-auto-columns: 1fr;
     grid-auto-flow: column;
     min-height: 800px;
     img {
         height: 100%;
         width: 100%;
-        object-contain: fit;
+        object-fit: contain;
     }
     .details {
         margin: 3rem;
@@ -43,7 +43,6 @@ class SingleItem extends Component {
                     ({error, loading, data}) => {
                         if(error) return <ErrorMessage error={error}/>
                         if(loading) return <p>Loading...</p>
-                        console.log(data);
                         const item = data.item;
                         return <SingleItemStyles>
                             <Head>
