@@ -29,9 +29,7 @@ class RemoveFromCart extends Component {
     } 
 
     update = (cache, payload) => {
-        console.log("running remove from cart update fn");
         const data = cache.readQuery({query: CURRENT_USER_QUERY});
-        console.log(data);
 
         // this is basically the specified payload from your mutation
         const cartItemId = payload.data.removeFromCart.id
