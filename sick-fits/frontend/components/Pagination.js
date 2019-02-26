@@ -24,25 +24,26 @@
                             if(loading) return <p>Loading...</p>; 
                             const count = data.itemsConnection.aggregate.count;
                             const pages = Math.ceil(count/perPage);
-                            return (<PaginationStyles>
+                            const {page} = this.props;
+                            return (<PaginationStyles data-test="pagination">
                                 <Head>
-                                    <title>Sick Fits | {this.props.page} of {pages}</title>
+                                    <title>Sick Fits | {page} of {pages}</title>
                                 </Head>
                                 <Link prefetch
                                 href={{
                                         pathName: "/items",
                                         query: {
-                                            page: this.props.page -1
+                                            page: page -1
                                         }
-                                    }}><a>Prev</a></Link>
-                                <p>{this.props.page} of {pages}</p>
+                                    }}><a className="prev" aria-disabled={page <= 1}>Prev</a></Link>
+                                <p>{page} of <span className="totalPages">{pages}</span></p>
                                 <Link prefetch
                                 href={{
                                         pathName: "/items",
                                         query: {
-                                            page: this.props.page + 1
+                                            page: page + 1
                                         }
-                                    }}><a>Next</a></Link>
+                                    }}><a className="next" aria-disabled={page >= pages}>Next</a></Link>
                             </PaginationStyles>);
 
                         } }
@@ -52,3 +53,4 @@
     }
     
     export default Pagination;
+    export {PAGINATION_QUERY};
