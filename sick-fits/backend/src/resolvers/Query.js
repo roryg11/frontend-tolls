@@ -22,12 +22,41 @@ const Query = {
         // 3 fetch all users
        const users = await ctx.db.query.users({}, info);
        return users;
+    },
+    async order(parent, args, ctx, info){
+        // are they logged in?
+        if(!ctx.request.userId){
+            throw new Error("You need to be logged in to view orders");
+        }
+
+        // do they have permission to view this order? 
+        const order = await ctx.db.query.order({where: {id: args.id}}, info);
+        const ownsOrder = order.user.id === ctx.request.userId;
+        const hasPermission = ctx.request.user.permissions.includes("ADMIN");
+        if(!ownsOrder || !hasPermission){
+            throw new Error("You do not have permission to view this order");
+        }
+
+        return order;
+    },
+    async orders(parent, args, ctx, info){
+        // are they logged in?
+        const {userId}  = ctx.request; 
+    
+        if(!userId){
+            throw new Error("You need to be logged in to view orders");
+        }
+
+        const orders = await ctx.db.query.orders({
+            where: {
+                user: {
+                    id: userId
+                }
+            }
+        }, info);
+        
+        return orders;
     }
-    // async items(parent, args, ctx, info){
-    //     console.log("Getting Items");
-    //     const items = await ctx.db.query.items();
-    //     return items
-    // }
 };
 
 module.exports = Query;
