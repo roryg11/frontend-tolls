@@ -41,7 +41,7 @@ class SingleItem extends Component {
             <Query query={SINGLE_ITEM_QUERY} variables={ {id: this.props.id}  }>
                 {
                     ({error, loading, data}) => {
-                        if(error) return <ErrorMessage error={error}/>
+                        if(error) return <Error error={error}/>
                         if(loading) return <p>Loading...</p>
                         const item = data.item;
                         return <SingleItemStyles>
@@ -62,3 +62,4 @@ class SingleItem extends Component {
 }
 
 export default SingleItem;
+export { SINGLE_ITEM_QUERY };

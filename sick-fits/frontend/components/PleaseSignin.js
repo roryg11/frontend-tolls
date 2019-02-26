@@ -8,7 +8,6 @@ const PleaseSignin = props => (
             ({data, loading})=>{
                 if(loading) return <p>Loading...</p>
                 if(!data.me){
-                    console.log("IN THE !DATA.ME");
                     return <div>
                             <p>Please sign in before continuing</p>
                             <SigninForm/>
