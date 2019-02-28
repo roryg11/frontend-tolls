@@ -38,7 +38,7 @@ class CreateItem extends Component {
     handleChange = (e) => {
         const { name, type, value } = e.target;
         const val = type === 'number' ? parseFloat(value) : value; 
-      this.setState({[name]: val}); 
+        this.setState({[name]: val}); 
     }
 
     uploadFile = async (e) => {
@@ -60,6 +60,7 @@ class CreateItem extends Component {
                 {(createItem, {loading, error}) => (
 
                 <Form 
+                    data-test="form"
                     onSubmit={async e=> {
                         // stop form from submitting
                         e.preventDefault();
