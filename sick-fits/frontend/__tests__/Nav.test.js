@@ -43,8 +43,9 @@ describe('Nav', ()=>{
         await wait();
         wrapper.update();
         const links = wrapper.find('Link');
+        const nav = wrapper.find('Nav');
         expect(links.length).toEqual(3);
-        expect(toJSON(wrapper)).toMatchSnapshot();
+        expect(toJSON(nav)).toMatchSnapshot();
 ;    });
     it('shows the full nav when a user is logged in', async ()=>{
         const wrapper = mount(

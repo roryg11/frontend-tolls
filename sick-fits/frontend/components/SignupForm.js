@@ -17,8 +17,8 @@ const SIGNUP_MUTATION = gql`
     ){
         signup(name: $name, email: $email, password: $password){
             id
-            email
             name 
+            email
         }
     }
 `
@@ -44,7 +44,7 @@ class SignupForm extends Component {
                 { (signup, {error, loading})=> {
                         if(error) return <Error error={error}/>
                         if(loading) return <p>Loading...</p>
-                        return (<Form method="post" onSubmit={ async e =>{
+                        return (<Form data-test="form" method="post" onSubmit={ async e =>{
                             e.preventDefault();
                             await signup();
                             this.setState({name: "", email: "", password: ""});
@@ -53,6 +53,7 @@ class SignupForm extends Component {
                                 <label>
                                     Email
                                     <input 
+                                    id="email"
                                     type="text" 
                                     name="email" 
                                     placeholder="Email"
@@ -62,6 +63,7 @@ class SignupForm extends Component {
                                 <label>
                                     Name
                                     <input 
+                                    id="name"
                                     type="text" 
                                     name="name" 
                                     placeholder="Name"
@@ -71,6 +73,7 @@ class SignupForm extends Component {
                                 <label>
                                     Password
                                     <input 
+                                    id="password"
                                     type="password" 
                                     name="password" 
                                     placeholder="Password"
@@ -89,3 +92,4 @@ class SignupForm extends Component {
 }
 
 export default SignupForm;
+export { SIGNUP_MUTATION };
