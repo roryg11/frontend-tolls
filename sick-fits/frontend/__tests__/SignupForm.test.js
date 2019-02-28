@@ -32,7 +32,7 @@ const mocks = [
     },
     // mock for current user query
     {
-        request: { CURRENT_USER_QUERY },
+        request: { query: CURRENT_USER_QUERY },
         result: {
             data: { me }
         }
@@ -84,8 +84,9 @@ describe('<SignupForm/>', ()=>{
         wrapper.find('form').simulate('submit');
 
         await wait();
+        wrapper.update();
         const user = await apolloClient.query({query: CURRENT_USER_QUERY});
 
-        console.log(user);
+        expect(user.data.me).toMatchObject(me);
     });
 });

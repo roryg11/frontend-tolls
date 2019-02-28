@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import styled from "styled-components";
 import Form from "./styles/Form"; 
 import Error from "./ErrorMessage";
+import { CURRENT_USER_QUERY } from "./User";
 
 const FormStyles = styled.div`
 
@@ -40,14 +41,17 @@ class SignupForm extends Component {
 
     render() {
         return (
-            <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
+            <Mutation mutation={SIGNUP_MUTATION} variables={this.state} refetchQueries={ [{query: CURRENT_USER_QUERY }] }>
                 { (signup, {error, loading})=> {
                         if(error) return <Error error={error}/>
                         if(loading) return <p>Loading...</p>
                         return (<Form data-test="form" method="post" onSubmit={ async e =>{
                             e.preventDefault();
-                            await signup();
-                            this.setState({name: "", email: "", password: ""});
+                            await signup().then((res)=>{
+                                console.log(res.signup);
+                                this.setState({name: "", email: "", password: ""});
+                            })
+                            .catch(err=> { console.log(err)});
                         }}>
                             <fieldset disabled={loading} aria-busy={loading}>
                                 <label>
