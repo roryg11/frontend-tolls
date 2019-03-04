@@ -58,7 +58,7 @@ class RemoveFromCart extends Component {
                         onClick={()=>{
                             // you can also pass the variables into this function if 
                             // you prefer (I personally like how that looks)
-                            return removeFromCart({variables: { id: this.props.id}}).catch( err => alert(err.message));
+                            return removeFromCart({variables: { id: this.props.id}}).catch( err => console.log(err.message));
                         } }
                         title="Delete Item" > &times;</BigButton>
                 ) }
@@ -68,3 +68,4 @@ class RemoveFromCart extends Component {
 }
 
 export default RemoveFromCart;
+export {REMOVE_FROM_CART_MUTATION}; 
