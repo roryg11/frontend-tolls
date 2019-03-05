@@ -1,0 +1,334 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CartItem/> matches the snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <CartItem
+    cartItem={
+      Object {
+        "id": "ABC123",
+        "item": Object {
+          "id": "ABF234",
+          "image": "imAPlant.jpg",
+          "price": 30505,
+          "title": "Cutest Planter",
+        },
+        "quantity": 4,
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <img
+          src="imAPlant.jpg"
+          width="100"
+        />,
+        <div
+          className="cart-item-details"
+        >
+          <h3>
+            Cutest Planter
+          </h3>
+          <p>
+            $1,220.20
+             - 
+            <em>
+              4
+               × 
+              $305.05
+               each
+            </em>
+          </p>
+        </div>,
+        <RemoveFromCart
+          id="ABC123"
+        />,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "src": "imAPlant.jpg",
+          "width": "100",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": "img",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <h3>
+              Cutest Planter
+            </h3>,
+            <p>
+              $1,220.20
+               - 
+              <em>
+                4
+                 × 
+                $305.05
+                 each
+              </em>
+            </p>,
+          ],
+          "className": "cart-item-details",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "Cutest Planter",
+            },
+            "ref": null,
+            "rendered": "Cutest Planter",
+            "type": "h3",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "$1,220.20",
+                " - ",
+                <em>
+                  4
+                   × 
+                  $305.05
+                   each
+                </em>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              "$1,220.20",
+              " - ",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": Array [
+                    4,
+                    " × ",
+                    "$305.05",
+                    " each",
+                  ],
+                },
+                "ref": null,
+                "rendered": Array [
+                  4,
+                  " × ",
+                  "$305.05",
+                  " each",
+                ],
+                "type": "em",
+              },
+            ],
+            "type": "p",
+          },
+        ],
+        "type": "div",
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "id": "ABC123",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <img
+            src="imAPlant.jpg"
+            width="100"
+          />,
+          <div
+            className="cart-item-details"
+          >
+            <h3>
+              Cutest Planter
+            </h3>
+            <p>
+              $1,220.20
+               - 
+              <em>
+                4
+                 × 
+                $305.05
+                 each
+              </em>
+            </p>
+          </div>,
+          <RemoveFromCart
+            id="ABC123"
+          />,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "src": "imAPlant.jpg",
+            "width": "100",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": "img",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <h3>
+                Cutest Planter
+              </h3>,
+              <p>
+                $1,220.20
+                 - 
+                <em>
+                  4
+                   × 
+                  $305.05
+                   each
+                </em>
+              </p>,
+            ],
+            "className": "cart-item-details",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "Cutest Planter",
+              },
+              "ref": null,
+              "rendered": "Cutest Planter",
+              "type": "h3",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "$1,220.20",
+                  " - ",
+                  <em>
+                    4
+                     × 
+                    $305.05
+                     each
+                  </em>,
+                ],
+              },
+              "ref": null,
+              "rendered": Array [
+                "$1,220.20",
+                " - ",
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "host",
+                  "props": Object {
+                    "children": Array [
+                      4,
+                      " × ",
+                      "$305.05",
+                      " each",
+                    ],
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    4,
+                    " × ",
+                    "$305.05",
+                    " each",
+                  ],
+                  "type": "em",
+                },
+              ],
+              "type": "p",
+            },
+          ],
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "id": "ABC123",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;

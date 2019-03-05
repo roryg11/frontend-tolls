@@ -1,0 +1,358 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav shows a simple nav when a user is not signed in 1`] = `
+<Nav>
+  <User>
+    <Query
+      query={
+        Object {
+          "definitions": Array [
+            Object {
+              "directives": Array [],
+              "kind": "OperationDefinition",
+              "name": undefined,
+              "operation": "query",
+              "selectionSet": Object {
+                "kind": "SelectionSet",
+                "selections": Array [
+                  Object {
+                    "alias": undefined,
+                    "arguments": Array [],
+                    "directives": Array [],
+                    "kind": "Field",
+                    "name": Object {
+                      "kind": "Name",
+                      "value": "me",
+                    },
+                    "selectionSet": Object {
+                      "kind": "SelectionSet",
+                      "selections": Array [
+                        Object {
+                          "alias": undefined,
+                          "arguments": Array [],
+                          "directives": Array [],
+                          "kind": "Field",
+                          "name": Object {
+                            "kind": "Name",
+                            "value": "id",
+                          },
+                          "selectionSet": undefined,
+                        },
+                        Object {
+                          "alias": undefined,
+                          "arguments": Array [],
+                          "directives": Array [],
+                          "kind": "Field",
+                          "name": Object {
+                            "kind": "Name",
+                            "value": "name",
+                          },
+                          "selectionSet": undefined,
+                        },
+                        Object {
+                          "alias": undefined,
+                          "arguments": Array [],
+                          "directives": Array [],
+                          "kind": "Field",
+                          "name": Object {
+                            "kind": "Name",
+                            "value": "email",
+                          },
+                          "selectionSet": undefined,
+                        },
+                        Object {
+                          "alias": undefined,
+                          "arguments": Array [],
+                          "directives": Array [],
+                          "kind": "Field",
+                          "name": Object {
+                            "kind": "Name",
+                            "value": "permissions",
+                          },
+                          "selectionSet": undefined,
+                        },
+                        Object {
+                          "alias": undefined,
+                          "arguments": Array [],
+                          "directives": Array [],
+                          "kind": "Field",
+                          "name": Object {
+                            "kind": "Name",
+                            "value": "orders",
+                          },
+                          "selectionSet": Object {
+                            "kind": "SelectionSet",
+                            "selections": Array [
+                              Object {
+                                "alias": undefined,
+                                "arguments": Array [],
+                                "directives": Array [],
+                                "kind": "Field",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "id",
+                                },
+                                "selectionSet": undefined,
+                              },
+                            ],
+                          },
+                        },
+                        Object {
+                          "alias": undefined,
+                          "arguments": Array [],
+                          "directives": Array [],
+                          "kind": "Field",
+                          "name": Object {
+                            "kind": "Name",
+                            "value": "cart",
+                          },
+                          "selectionSet": Object {
+                            "kind": "SelectionSet",
+                            "selections": Array [
+                              Object {
+                                "alias": undefined,
+                                "arguments": Array [],
+                                "directives": Array [],
+                                "kind": "Field",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "id",
+                                },
+                                "selectionSet": undefined,
+                              },
+                              Object {
+                                "alias": undefined,
+                                "arguments": Array [],
+                                "directives": Array [],
+                                "kind": "Field",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "quantity",
+                                },
+                                "selectionSet": undefined,
+                              },
+                              Object {
+                                "alias": undefined,
+                                "arguments": Array [],
+                                "directives": Array [],
+                                "kind": "Field",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "item",
+                                },
+                                "selectionSet": Object {
+                                  "kind": "SelectionSet",
+                                  "selections": Array [
+                                    Object {
+                                      "alias": undefined,
+                                      "arguments": Array [],
+                                      "directives": Array [],
+                                      "kind": "Field",
+                                      "name": Object {
+                                        "kind": "Name",
+                                        "value": "id",
+                                      },
+                                      "selectionSet": undefined,
+                                    },
+                                    Object {
+                                      "alias": undefined,
+                                      "arguments": Array [],
+                                      "directives": Array [],
+                                      "kind": "Field",
+                                      "name": Object {
+                                        "kind": "Name",
+                                        "value": "title",
+                                      },
+                                      "selectionSet": undefined,
+                                    },
+                                    Object {
+                                      "alias": undefined,
+                                      "arguments": Array [],
+                                      "directives": Array [],
+                                      "kind": "Field",
+                                      "name": Object {
+                                        "kind": "Name",
+                                        "value": "description",
+                                      },
+                                      "selectionSet": undefined,
+                                    },
+                                    Object {
+                                      "alias": undefined,
+                                      "arguments": Array [],
+                                      "directives": Array [],
+                                      "kind": "Field",
+                                      "name": Object {
+                                        "kind": "Name",
+                                        "value": "image",
+                                      },
+                                      "selectionSet": undefined,
+                                    },
+                                    Object {
+                                      "alias": undefined,
+                                      "arguments": Array [],
+                                      "directives": Array [],
+                                      "kind": "Field",
+                                      "name": Object {
+                                        "kind": "Name",
+                                        "value": "price",
+                                      },
+                                      "selectionSet": undefined,
+                                    },
+                                  ],
+                                },
+                              },
+                            ],
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+              "variableDefinitions": Array [],
+            },
+          ],
+          "kind": "Document",
+          "loc": Object {
+            "end": 419,
+            "start": 0,
+          },
+        }
+      }
+    >
+      <NavStyles>
+        <ul
+          className="NavStyles-sc-11c0d2g-0 iTUtFG"
+        >
+          <Link
+            href="/items"
+          >
+            <a
+              href="/items"
+              onClick={[Function]}
+            >
+              Shop
+            </a>
+          </Link>
+          <Link
+            href="/signup"
+          >
+            <a
+              href="/signup"
+              onClick={[Function]}
+            >
+              Signup
+            </a>
+          </Link>
+          <Link
+            href="/"
+          >
+            <a
+              href="/"
+              onClick={[Function]}
+            >
+              Home
+            </a>
+          </Link>
+        </ul>
+      </NavStyles>
+    </Query>
+  </User>
+</Nav>
+`;
+
+exports[`Nav shows the cart count when the user has items in their cart 1`] = `
+Array [
+  <CSSTransition
+    className="count"
+    classNames="count"
+    in={true}
+    key=".$9"
+    onExited={[Function]}
+    timeout={
+      Object {
+        "enter": 400,
+        "exit": 400,
+      }
+    }
+    unmountOnExit={true}
+  >
+    <Transition
+      appear={false}
+      className="count"
+      enter={true}
+      exit={true}
+      in={true}
+      mountOnEnter={false}
+      onEnter={[Function]}
+      onEntered={[Function]}
+      onEntering={[Function]}
+      onExit={[Function]}
+      onExited={[Function]}
+      onExiting={[Function]}
+      timeout={
+        Object {
+          "enter": 400,
+          "exit": 400,
+        }
+      }
+      unmountOnExit={true}
+    >
+      <CartCount__Dot
+        className="count"
+      >
+        <div
+          className="count CartCount__Dot-xxvp4g-1 fKxapv"
+        >
+          9
+        </div>
+      </CartCount__Dot>
+    </Transition>
+  </CSSTransition>,
+  <Transition
+    appear={false}
+    className="count"
+    enter={true}
+    exit={true}
+    in={true}
+    mountOnEnter={false}
+    onEnter={[Function]}
+    onEntered={[Function]}
+    onEntering={[Function]}
+    onExit={[Function]}
+    onExited={[Function]}
+    onExiting={[Function]}
+    timeout={
+      Object {
+        "enter": 400,
+        "exit": 400,
+      }
+    }
+    unmountOnExit={true}
+  >
+    <CartCount__Dot
+      className="count"
+    >
+      <div
+        className="count CartCount__Dot-xxvp4g-1 fKxapv"
+      >
+        9
+      </div>
+    </CartCount__Dot>
+  </Transition>,
+  <CartCount__Dot
+    className="count"
+  >
+    <div
+      className="count CartCount__Dot-xxvp4g-1 fKxapv"
+    >
+      9
+    </div>
+  </CartCount__Dot>,
+  <div
+    className="count CartCount__Dot-xxvp4g-1 fKxapv"
+  >
+    9
+  </div>,
+]
+`;
