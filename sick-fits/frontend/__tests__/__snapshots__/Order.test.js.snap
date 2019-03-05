@@ -1,0 +1,352 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Order/> renders and matches snapshot 1`] = `
+<Order
+  id="ord123"
+>
+  <Query
+    query={
+      Object {
+        "definitions": Array [
+          Object {
+            "directives": Array [],
+            "kind": "OperationDefinition",
+            "name": Object {
+              "kind": "Name",
+              "value": "SINGLE_ORDER_QUERY",
+            },
+            "operation": "query",
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [
+                    Object {
+                      "kind": "Argument",
+                      "name": Object {
+                        "kind": "Name",
+                        "value": "id",
+                      },
+                      "value": Object {
+                        "kind": "Variable",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "id",
+                        },
+                      },
+                    },
+                  ],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "order",
+                  },
+                  "selectionSet": Object {
+                    "kind": "SelectionSet",
+                    "selections": Array [
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "id",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "total",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "charge",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "createdAt",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "user",
+                        },
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "id",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
+                        },
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "orderItems",
+                        },
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "id",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "title",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "description",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "image",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "price",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "quantity",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+            "variableDefinitions": Array [
+              Object {
+                "defaultValue": undefined,
+                "kind": "VariableDefinition",
+                "type": Object {
+                  "kind": "NonNullType",
+                  "type": Object {
+                    "kind": "NamedType",
+                    "name": Object {
+                      "kind": "Name",
+                      "value": "ID",
+                    },
+                  },
+                },
+                "variable": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "id",
+                  },
+                },
+              },
+            ],
+          },
+        ],
+        "kind": "Document",
+        "loc": Object {
+          "end": 384,
+          "start": 0,
+        },
+      }
+    }
+    variables={
+      Object {
+        "id": "ord123",
+      }
+    }
+  >
+    <OrderStyles>
+      <div
+        className="OrderStyles-sc-4oqalm-0 camMij"
+      >
+        <SideEffect(Head)>
+          <Head />
+        </SideEffect(Head)>
+        <p>
+          <span>
+            Order ID
+          </span>
+          <span>
+            ord123
+          </span>
+        </p>
+        <p>
+          <span>
+            Charge
+          </span>
+          <span>
+            ch_123
+          </span>
+        </p>
+        <p>
+          <span>
+            Date
+          </span>
+          <span>
+            March 31, 2018 5:00 PM
+          </span>
+        </p>
+        <p>
+          <span>
+            Order Total
+          </span>
+          <span>
+            $400
+          </span>
+        </p>
+        <p>
+          <span>
+            Order Count
+          </span>
+          <span>
+            2
+          </span>
+        </p>
+        <div
+          className="items"
+        >
+          <div
+            className="order-item"
+            key="3a430a73-c9e9-4bcc-b46a-41618965ffea"
+          >
+            <img
+              alt="soluta non omnis consequatur enim quia autem"
+              src="reprehenderit.jpg"
+            />
+            <div
+              className="item-details"
+            >
+              <h2>
+                soluta non omnis consequatur enim quia autem
+              </h2>
+              <p>
+                Each: 
+                $42.34
+              </p>
+              <p>
+                Subtotal: 
+                $42.34
+              </p>
+              <p>
+                et modi tenetur amet modi reprehenderit omnis
+              </p>
+            </div>
+          </div>
+          <div
+            className="order-item"
+            key="2393e090-592f-4d03-b808-c9d81098deec"
+          >
+            <img
+              alt="quia sed exercitationem omnis laborum exercitationem est"
+              src="sint.jpg"
+            />
+            <div
+              className="item-details"
+            >
+              <h2>
+                quia sed exercitationem omnis laborum exercitationem est
+              </h2>
+              <p>
+                Each: 
+                $42.34
+              </p>
+              <p>
+                Subtotal: 
+                $42.34
+              </p>
+              <p>
+                sapiente laudantium molestias assumenda quasi adipisci mollitia
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </OrderStyles>
+  </Query>
+</Order>
+`;

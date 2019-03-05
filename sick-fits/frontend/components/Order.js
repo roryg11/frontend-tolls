@@ -38,9 +38,9 @@ class Order extends Component {
         return (
             <Query query={SINGLE_ORDER_QUERY} variables={{id: this.props.id}}>
                 {({data, loading, error})=>{
+                    if(error) return <Error error={error}/>;
+                    if(loading) return <p>Loading...</p>;
                     const { order } = data; 
-                    if(error) <Error error={error}/>
-                    if(loading) <p>Loading...</p>
                     return(
                         <OrderStyles>
                             <Head>
@@ -89,3 +89,4 @@ class Order extends Component {
 }
 
 export default Order;
+export { SINGLE_ORDER_QUERY };

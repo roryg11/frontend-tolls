@@ -29,6 +29,7 @@ const mocks = [
         result: {
             data: {
                 removeFromCart: {
+                    __typename: 'CartItem',
                     id: cartItem.id
                 }
             } 
