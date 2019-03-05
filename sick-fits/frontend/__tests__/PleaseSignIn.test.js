@@ -49,7 +49,6 @@ describe('<PleaseSignIn/>', ()=>{
 
         await wait();
         signinWrapper.update();
-        console.log(signinWrapper.debug());
         
         expect(signinWrapper.text().includes("Please sign in before continuing")).toBe(false);
         expect(signinWrapper.contains(<Hey/>)).toBe(true);
