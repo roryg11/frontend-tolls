@@ -7,6 +7,11 @@ enum Permission {
   PERMISSIONUPDATE
 }
 
+enum Measurement{
+  FREQUENCY
+  LIST
+}
+
 type User {
   id: ID! @unique
   name: String!
@@ -16,6 +21,8 @@ type User {
   resetTokenExpiry: Float
   permissions: [Permission!]
   cart: [CartItem!]!
+  goals: [Goal]!
+  orders: [Order]!
 }
 
 type Item {
@@ -54,4 +61,37 @@ type Order {
   charge: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type Goal {
+  id: ID! @unique
+  name: String!
+  description: String
+  measurement: Measurement!
+  tasks: [Task]!
+  user: User!
+  dueDate: DateTime
+}
+
+type Task {
+  id: ID! @unique
+  name: String!
+  description: String
+  goal: Goal!
+  complete: Boolean
+  completedAt: DateTime
+  completedBy: User
+  subtasks: [SubTask]!
+  dueDate: DateTime
+}
+
+type SubTask {
+  id: ID! @unique
+  name: String!
+  description: String
+  task: Task!
+  complete: Boolean
+  completedAt: DateTime
+  completedBy: User
+  dueDate: DateTime
 }

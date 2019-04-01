@@ -56,6 +56,34 @@ const Query = {
         }, info);
         
         return orders;
+    },
+    async goals(parent, args, ctx, info){
+        const {userId} = ctx.request;
+        if(!userId){
+            throw new Error("You need to be logged in to view your goals!");
+        }
+
+        const goals = await ctx.db.query.goals({
+            where: {
+                user: {
+                    id: userId
+                }
+            }
+        }, info);
+
+        return goals; 
+    },
+    async goal(parent, args, ctx, info) {
+        const {userId} = ctx.request;
+        console.log(args);
+        console.log("IN THE GOAL QUEYR");
+        if(!userId){
+            throw new Error("You need to be logged in to view your goals!");
+        }
+
+        const goal = await ctx.db.query.goal({where: {id: args.id}}, info);
+
+        return goal;
     }
 };
 

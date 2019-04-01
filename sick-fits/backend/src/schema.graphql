@@ -16,6 +16,7 @@ type Mutation {
     addToCart(id: ID!): CartItem!
     removeFromCart(id: ID!): CartItem
     createOrder(token: String!): Order!
+    createGoal(name: String, description: String, measurement: Measurement ): Goal!
 }
 
 type Query {
@@ -24,8 +25,10 @@ type Query {
     itemsConnection: ItemConnection!
     me: User
     users: [User]!
-    order: Order
+    order(id: ID!): Order
     orders: [Order]!
+    goals: [Goal]!
+    goal(id: ID!): Goal
 }
 
 type User {
@@ -35,4 +38,5 @@ type User {
     permissions: [Permission!]!
     cart: [CartItem!]!
     orders: [OrderItem]
+    goals: [Goal]!
 }

@@ -336,6 +336,25 @@ const Mutations = {
         }); 
 
         return order; 
+    },
+    async createGoal(parent, args, ctx, info){
+        // check if user is logged in
+        if(!ctx.request.userId){
+            throw Error ("You must be logged in to do this!");
+        }
+
+        const goal = await ctx.db.mutation.createGoal({
+            data: {
+                user: {
+                    connect: {
+                        id: ctx.request.userId
+                    }
+                },
+                ...args
+            }
+        });
+
+        return goal; 
     }
 };
 
