@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import Link from "next/link";
 import gql from "graphql-tag";
 import styled from "styled-components";
+import { TransitionGroup, CSSTransition} from "react-transition-group";
 import Error from "./ErrorMessage";
 import Title from "./styles/Title";
 import { MEASUREMENTS } from "./CreateGoal";
+import UpdateGoal from "./UpdateGoal";
+import GoalDetail from "./GoalDetail";
 
 const SINGLE_GOAL_QUERY = gql`
     query SINGLE_GOAL_QUERY($id: ID!){
@@ -24,15 +27,48 @@ const SINGLE_GOAL_QUERY = gql`
     }
 `
 
+const DELETE_GOAL_MUTATAION = gql`
+    mutation DELETE_GOAL_MUTATION($id: ID!){
+        deleteGoal(id: $id){
+            id
+        }
+    }
+`
+
+const FadeIn = styled.div`
+    position: relative;
+    .goal{
+        display: block;
+        position: relative;
+        transition: all 4s;
+        height: 100%;
+    }
+    .goal-enter {
+        height: 0%;
+    }
+
+    .goal-enter-active {
+        height: 300px;
+        transition: height 500ms ease-in;
+    }
+
+    .goal-exit {
+        height: 300px;
+    }
+
+    .goal-exit-active {
+        height: 0px;
+        transition: height 300ms ease-in;
+    }
+`
+
+// put the delete goal here or in the update goal? 
+
 const GoalHeadline = styled.h2`
     border-bottom: 3px solid ${props=> props.theme.accentColor};
     text-align: center;
     flex-grow: 1; 
     display: flex;
-`
-
-const GoalDescription = styled.span`
-    font-weight: 100;
 `
 
 const Flex = styled.div`
@@ -41,6 +77,23 @@ const Flex = styled.div`
 `
 
 class Goal extends Component {
+    state = {
+        showEdit: false
+    }
+    switchGoalView= ()=>{
+        const newVal = !this.state.showEdit;
+        this.setState({showEdit: newVal }); 
+    }
+
+    deleteGoal = (e, deleteGoalMutation) => {
+        if(confirm("Are you sure? Deleting this goal will delete all of your associated tasks and subtasks")){
+            return deleteGoalMutation({
+                variables: {
+                    id: this.props.id
+                }
+        }) }
+    } 
+
     render(){
         const {id} = this.props; 
         // export any styles here to goal styles
@@ -51,36 +104,62 @@ class Goal extends Component {
                         if(loading) return <p>Loading...</p>;
                         const { goal } = data; 
                         return (
-                            <div>
-                            
-                                <GoalHeadline>{goal.name}</GoalHeadline>
-                                <div>
-                                    <div> <h4>WHY?</h4> <GoalDescription>{goal.description}</GoalDescription></div>
-                                    <div> <h4>Due Date:</h4> {goal.dueDate} NEED A CALENDAR WIDGET HERE</div>
-                                    <div>How will I measure my success?
-                                        { (goal.measurement ===  MEASUREMENTS.frequency) && <span>By building habits</span>}
-                                        { (goal.measurement ===  MEASUREMENTS.list) && <span>By working through a to-do list</span>}
-                                    </div>
-                                    <p>What success looks like: NEED TO ADD THIS TO GOAL CREATION</p>
-                                </div>
-                                <div>
-                                    <Flex>
-                                        <GoalHeadline>Milestones</GoalHeadline>
-                                        <Link href={ {
-                                            pathname: `/addMilestone`,
-                                            query: { id: goal.id },
-                                            }}>
-                                            <a>Add</a>
-                                        </Link>
-                                    </Flex>
-                                    <div>
-                                        { goal.tasks.map((task)=>{
-                                            return <p>{task.name}</p>;
-                                        })
-                                        }
-                                    </div>
-                                </div>
-                            </div>
+                            <Mutation mutation={DELETE_GOAL_MUTATAION} variables={ {id: goal.id}}>
+                                {(deleteGoal, {loading, error})=>{
+                                    return(
+                                        <div>
+                                            <Flex>
+                                                <GoalHeadline>{goal.name}</GoalHeadline>
+                                                <button onClick={this.switchGoalView}>Edit</button>
+                                                <button onClick={(e)=> this.deleteGoal(e, deleteGoal)}>Delete</button>
+                                            </Flex>
+                                            <div>
+                                                <FadeIn>
+                                                    <TransitionGroup>
+                                                        <CSSTransition
+                                                            unmountOnExit
+                                                            classNames="goal"
+                                                            key={`read-${goal.id}`}
+                                                            timeout={{enter: 4000, exit:4000}}>
+                                                            <GoalDetail goal={goal}/>
+                                                        </CSSTransition>
+                                                    </TransitionGroup>
+                                                </FadeIn>
+                                                <FadeIn>
+                                                    <TransitionGroup>
+                                                        <CSSTransition
+                                                            unmountOnExit
+                                                            classNames="goal"
+                                                            key={`read-${goal.id}`}
+                                                            timeout={{enter: 4000, exit:4000}}>
+                                                            <UpdateGoal goal={goal}/>
+                                                        </CSSTransition>
+                                                    </TransitionGroup>
+                                                </FadeIn>
+                                            </div>
+                                            
+                                            
+                                            <div>
+                                                <Flex>
+                                                    <GoalHeadline>Milestones</GoalHeadline>
+                                                    <Link href={ {
+                                                        pathname: `/addMilestone`,
+                                                        query: { id: goal.id },
+                                                        }}>
+                                                        <a>Add</a>
+                                                    </Link>
+                                                </Flex>
+                                                <div>
+                                                    { goal.tasks.map((task)=>{
+                                                        return <p>{task.name}</p>;
+                                                    })
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                }}
+                            </Mutation>
                         )
                     }
                 }

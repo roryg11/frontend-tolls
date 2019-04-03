@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import Router from "next/router";
 import styled from "styled-components";
 import Error from "./ErrorMessage";
 import Form from "./styles/Form";
@@ -51,6 +52,10 @@ class CreateGoal extends Component {
                                 e.preventDefault();
 
                                 const res = await createGoal();
+                                Router.push({
+                                    pathname: "/goal", 
+                                    query: {id: res.data.createGoal.id}
+                                });
                             }
                             }>
                                  <label htmlFor="name">
@@ -75,7 +80,7 @@ class CreateGoal extends Component {
                                 </label>
                                 <label htmlFor="measurement">
                                     Measurement - how will you measure your success?
-                                    <select onChange={this.onChange} name="measurement" value={this.state} defaultValue={MEASUREMENTS.frequency}>
+                                    <select onChange={this.onChange} name="measurement" defaultValue={MEASUREMENTS.frequency}>
                                         {
                                             MEASUREMENTS.map((measurement)=>{
                                                 return <option key={measurement} value={measurement}>{measurement}</option>;    

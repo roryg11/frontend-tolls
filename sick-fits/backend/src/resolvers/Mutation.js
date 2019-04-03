@@ -352,9 +352,55 @@ const Mutations = {
                 },
                 ...args
             }
-        });
+        }, info);
 
         return goal; 
+    },
+    async updateGoal(parent, args, ctx, info){
+        // check if user is logged in
+        if(!ctx.request.userId){
+            throw Error ("You must be logged in to do this!");
+        }
+
+        console.log(args);
+
+        const updates = {...args};
+        delete updates.id;
+
+        const updatedGoal = await ctx.db.mutation.updateGoal({
+            data: updates,
+            where: {
+                id: args.id
+            }
+        }, info);
+
+        return updatedGoal;
+    },
+    async deleteGoal(parent, args, ctx, info){
+        console.log("IN THE DELETE GOAL MUTATION");
+        const where = {id: args.id};
+        // check if user is logged in
+        if(!ctx.request.userId){
+            throw Error ("You must be logged in to do this!");
+        }
+
+        // const goal = await ctx.db.query.goal({where: {id: args.id}}, `
+        //     {
+        //         id 
+        //         user {
+        //             id
+        //         }
+        //         tasks { 
+        //             id 
+        //             subtasks {
+        //                 id
+        //             } 
+        //         }
+        //     }`);
+
+        // TO DO DELETE tasks associated with goal
+        // TO DO DELETE subtasks associated with tasks
+        return ctx.db.mutation.deleteGoal({where}, info);
     }
 };
 

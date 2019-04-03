@@ -75,8 +75,6 @@ const Query = {
     },
     async goal(parent, args, ctx, info) {
         const {userId} = ctx.request;
-        console.log(args);
-        console.log("IN THE GOAL QUEYR");
         if(!userId){
             throw new Error("You need to be logged in to view your goals!");
         }
