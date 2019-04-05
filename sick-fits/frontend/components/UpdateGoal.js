@@ -28,34 +28,6 @@ const UPDATE_GOAL_MUTATION = gql`
     }
 `
 
-const FadeIn = styled.div`
-    position: relative;
-    .goal{
-        display: block;
-        position: relative;
-        transition: all 4s;
-        height: 100%;
-    }
-    // inital state
-    .goal-enter {
-        height: 0%;
-    }
-
-    .goal-enter-active {
-        height: 100%;
-        transition: height 500ms ease-in;
-    }
-
-    .goal-exit {
-        height: 100%;
-    }
-
-    .goal-exit-active {
-        height: 5%;
-        transition: height 300ms ease-in;
-    }
-`
-
 class UpdateGoal extends Component {
     state = {}
     handleChange = (e) => {
@@ -73,14 +45,6 @@ class UpdateGoal extends Component {
             }
         });
         this.props.updatedCb();
-    }
-
-    componentDidMount(){
-        console.log("COMPONENT DID MOUNT");
-    }
-
-    componentWillUnmount(){
-        console.log("COMPONENT UNMOUNTING!");
     }
 
     render() {

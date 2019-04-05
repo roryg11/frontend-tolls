@@ -36,29 +36,64 @@ const DELETE_GOAL_MUTATAION = gql`
 `
 
 const FadeIn = styled.div`
-    position: relative;
     .goal{
-        display: block;
-        position: relative;
-        transition: all 4s;
-        height: 100%;
+        transition: all 400ms ease-in;
+        opacity: 0;
+        position: absolute;
+        z-index: 2; 
+        height: 400px;
     }
     .goal-enter {
-        height: 0%;
+        opacity: 0;
+        transition: all 4s ease-in;
     }
 
     .goal-enter-active {
-        height: 300px;
-        transition: height 500ms ease-in;
+        opacity: 1;
+        transition: all 4s ease-in;
     }
 
     .goal-exit {
-        height: 300px;
+        opacity: 0;
+        transition: all 4s ease-in;
     }
 
     .goal-exit-active {
-        height: 0px;
-        transition: height 300ms ease-in;
+        opacity: 0;
+        transition: all 4s ease-in;  
+    }
+`
+
+const OuterGoalContainer = styled.div`
+    overflow: hidden;
+    height: 400px;
+    position: relative;
+`
+const FadeOut = styled.div`  
+    .view{
+        transition: all 400ms ease-in;
+        opacity: 0;
+        position: fixed;
+        height: 400px;
+    }
+    .view-enter {
+        opacity: 0;
+        transition: all 4s ease-in;
+    }
+
+    .view-enter-active {
+        opacity: 1;
+        transition: all 4s ease-in;
+    }
+
+    .view-exit {
+        opacity: 1;
+        transition: all 4s ease-in;
+    }
+
+    .view-exit-active {
+        opacity: 0;
+        transition: all 4s ease-in;  
     }
 `
 
@@ -78,11 +113,12 @@ const Flex = styled.div`
 
 class Goal extends Component {
     state = {
+        showView: true,
         showEdit: false
     }
-    switchGoalView= ()=>{
-        const newVal = !this.state.showEdit;
-        this.setState({showEdit: newVal }); 
+    switchView= () => {
+        const newVal = !this.state.showEdit; 
+        this.setState({showEdit: newVal});
     }
 
     deleteGoal = (e, deleteGoalMutation) => {
@@ -110,35 +146,33 @@ class Goal extends Component {
                                         <div>
                                             <Flex>
                                                 <GoalHeadline>{goal.name}</GoalHeadline>
-                                                <button onClick={this.switchGoalView}>Edit</button>
+                                                <button onClick={this.switchView}>Edit</button>
                                                 <button onClick={(e)=> this.deleteGoal(e, deleteGoal)}>Delete</button>
                                             </Flex>
-                                            <div>
-                                                <FadeIn>
-                                                    <TransitionGroup>
-                                                        <CSSTransition
+                                            <OuterGoalContainer>
+                                                <FadeOut>
+                                                    <CSSTransition
                                                             unmountOnExit
-                                                            classNames="goal"
-                                                            key={`read-${goal.id}`}
-                                                            timeout={{enter: 4000, exit:4000}}>
-                                                            <GoalDetail goal={goal}/>
-                                                        </CSSTransition>
-                                                    </TransitionGroup>
-                                                </FadeIn>
+                                                            in={!this.state.showEdit}
+                                                            classNames="view"
+                                                            className="view"
+                                                            key={`view-${goal.id}`}
+                                                            timeout={{enter: 400, exit:100}}>
+                                                            <GoalDetail className="view" goal={goal}/>
+                                                    </CSSTransition>
+                                                </FadeOut>
                                                 <FadeIn>
-                                                    <TransitionGroup>
-                                                        <CSSTransition
+                                                    <CSSTransition
                                                             unmountOnExit
+                                                            in={!!this.state.showEdit}
                                                             classNames="goal"
-                                                            key={`read-${goal.id}`}
-                                                            timeout={{enter: 4000, exit:4000}}>
-                                                            <UpdateGoal goal={goal}/>
-                                                        </CSSTransition>
-                                                    </TransitionGroup>
+                                                            className="goal"
+                                                            key={`edit-${goal.id}`}
+                                                            timeout={{enter: 400, exit: 0}}>
+                                                            <UpdateGoal className="goal" goal={goal}/>
+                                                    </CSSTransition>
                                                 </FadeIn>
-                                            </div>
-                                            
-                                            
+                                            </OuterGoalContainer>
                                             <div>
                                                 <Flex>
                                                     <GoalHeadline>Milestones</GoalHeadline>
