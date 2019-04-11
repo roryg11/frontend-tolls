@@ -19,6 +19,8 @@ type Mutation {
     createGoal(name: String, description: String, measurement: Measurement ): Goal!
     updateGoal(id: ID!, name: String, description: String, measurement: Measurement): Goal!
     deleteGoal(id: ID!): Goal
+    createTask(name: String, description: String, goalId: ID!): Task!
+    updateTask(id: ID!, name: String, description: String, complete: Boolean, dueDate: DateTime): Task!
 }
 
 type Query {
@@ -31,6 +33,7 @@ type Query {
     orders: [Order]!
     goals: [Goal]!
     goal(id: ID!): Goal
+    task(id: ID!): Task
 }
 
 type User {

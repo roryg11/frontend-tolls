@@ -9,6 +9,7 @@ import Title from "./styles/Title";
 import { MEASUREMENTS } from "./CreateGoal";
 import UpdateGoal from "./UpdateGoal";
 import GoalDetail from "./GoalDetail";
+import AddButton from "./styles/AddButton";
 
 const SINGLE_GOAL_QUERY = gql`
     query SINGLE_GOAL_QUERY($id: ID!){
@@ -180,12 +181,23 @@ class Goal extends Component {
                                                         pathname: `/addMilestone`,
                                                         query: { id: goal.id },
                                                         }}>
-                                                        <a>Add</a>
+                                                        <a>
+                                                            <AddButton>+</AddButton>
+                                                        </a>
                                                     </Link>
                                                 </Flex>
                                                 <div>
                                                     { goal.tasks.map((task)=>{
-                                                        return <p>{task.name}</p>;
+                                                        return( 
+                                                        <div>
+                                                            <Link
+                                                                href= {{
+                                                                    pathname: '/milestone',
+                                                                    query: { id: task.id }
+                                                                }}
+                                                            ><a>{task.name}</a>
+                                                            </Link>
+                                                        </div>)
                                                     })
                                                     }
                                                 </div>

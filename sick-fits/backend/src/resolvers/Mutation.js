@@ -377,7 +377,6 @@ const Mutations = {
         return updatedGoal;
     },
     async deleteGoal(parent, args, ctx, info){
-        console.log("IN THE DELETE GOAL MUTATION");
         const where = {id: args.id};
         // check if user is logged in
         if(!ctx.request.userId){
@@ -401,6 +400,47 @@ const Mutations = {
         // TO DO DELETE tasks associated with goal
         // TO DO DELETE subtasks associated with tasks
         return ctx.db.mutation.deleteGoal({where}, info);
+    },
+    async createTask(parent, args, ctx, info){
+        if(!ctx.request.userId){
+            throw Error ("You must be logged in to do this!");
+        } 
+
+        const { name, description } = args; 
+
+        const task = await ctx.db.mutation.createTask(
+            {
+                data: {
+                    goal: {
+                        connect: {
+                            id: args.goalId
+                        }
+                    },
+                    name,
+                    description
+                }
+            },
+            info
+        );
+
+        return task; 
+    },
+    async updateTask(parent, args, ctx, info){
+        if(!ctx.request.userId){
+            throw Error ("You must be logged in to do this!");
+        }
+
+        const updates = {...args};
+        delete updates.id;
+
+        const updatedTask = await ctx.db.mutation.updateTask({
+            data: updates,
+            where: {
+                id: args.id
+            }
+        }, info);
+
+        return updatedTask;
     }
 };
 

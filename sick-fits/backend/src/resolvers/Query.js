@@ -82,6 +82,18 @@ const Query = {
         const goal = await ctx.db.query.goal({where: {id: args.id}}, info);
 
         return goal;
+    },
+    async task(parent, args, ctx, info) {
+        const {userId} = ctx.request;
+        if(!userId){
+            throw new Error("You need to be logged in to view your goals!");
+        }
+
+        const task = await ctx.db.query.task({
+            where: {id: args.id}
+        }, info);
+
+        return task;
     }
 };
 
