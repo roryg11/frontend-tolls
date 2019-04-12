@@ -441,6 +441,15 @@ const Mutations = {
         }, info);
 
         return updatedTask;
+    },
+    async deleteTask(parent, args, ctx, info){
+        if(!ctx.request.userId){
+            throw Error ("You must be logged in to do this!");
+        }
+
+        const where = {id: args.id};
+
+        return ctx.db.mutation.deleteTask({where}, info);
     }
 };
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import Router from "next/router";
 import Error from "./ErrorMessage";
 import AddButton from "./styles/AddButton";
 import UpdateTask from "./UpdateTask";
@@ -26,6 +27,16 @@ const GOAL_TASK_QUERY = gql`
     }
 `
 
+const DELETE_TASK_MUTATION = gql`
+    mutation DELETE_TASK_MUTATION (
+        $id: ID!
+    ) {
+        deleteTask(id: $id){
+            id
+        }
+    }
+`
+
 class Task extends Component {
     state = {
         showEdit: false
@@ -46,6 +57,22 @@ class Task extends Component {
                             <div>
                                 <div>
                                     <SickButton onClick={this.toggleEdit}>Edit</SickButton>
+                                    <Mutation mutation={DELETE_TASK_MUTATION} variables={ {id: task.id} }>
+                                        {
+                                            (deleteTask, {deleteError, deleteLoading}) => {
+                                                if(deleteError) return <Error error={deleteError}/>;
+                                                if(deleteLoading) return <p>Loading...</p>;
+                                                return <SickButton onClick={()=>{
+                                                    deleteTask();
+                                                    console.log(task.goal.id);
+                                                    Router.push({
+                                                        pathname: "/goal",
+                                                        query: {id: task.goal.id}
+                                                    })
+                                                }}>Delete</SickButton>
+                                            }
+                                        }
+                                    </Mutation>
                                 </div>
                                 <div>
                                     {

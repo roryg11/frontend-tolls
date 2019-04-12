@@ -21,6 +21,7 @@ type Mutation {
     deleteGoal(id: ID!): Goal
     createTask(name: String, description: String, goalId: ID!): Task!
     updateTask(id: ID!, name: String, description: String, complete: Boolean, dueDate: DateTime): Task!
+    deleteTask(id: ID!): Task
 }
 
 type Query {
