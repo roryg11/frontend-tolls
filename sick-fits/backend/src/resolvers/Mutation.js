@@ -441,6 +441,39 @@ const Mutations = {
         }, info);
 
         return updatedTask;
+    },
+    async deleteTask(parent, args, ctx, info){
+        if(!ctx.request.userId){
+            throw Error ("You must be logged in to do this!");
+        }
+
+        const where = {id: args.id};
+
+        return ctx.db.mutation.deleteTask({where}, info);
+    },
+    async createSubTask(parent, args, ctx, info){
+        if(!ctx.request.userId){
+            throw Error ("You must be logged in to do this!");
+        }
+
+        const { name, description } = args;
+
+        const task = await ctx.db.mutation.createSubTask(
+            {
+                data: {
+                    task: {
+                        connect: {
+                            id: args.taskId
+                        }
+                    },
+                    name,
+                    description
+                }
+            },
+            info
+        );
+
+        return task; 
     }
 };
 
