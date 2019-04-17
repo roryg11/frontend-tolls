@@ -117,7 +117,7 @@ class Goal extends Component {
         showView: true,
         showEdit: false
     }
-    switchView= () => {
+    switchView = () => {
         const newVal = !this.state.showEdit; 
         this.setState({showEdit: newVal});
     }

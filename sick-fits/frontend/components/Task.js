@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import styled from "styled-components";
 import Router from "next/router";
 import Error from "./ErrorMessage";
-import AddButton from "./styles/AddButton";
 import UpdateTask from "./UpdateTask";
 import SickButton from "./styles/SickButton";
+import {FlexCenterAlign} from "./styles/FlexUtilities";
+import FormDialog from "./FormDialog";
+import AddSubtask from "./AddSubtask";
 
 const GOAL_TASK_QUERY = gql`
     query GOAL_TASK_QUERY (
@@ -22,6 +25,8 @@ const GOAL_TASK_QUERY = gql`
             complete
             subtasks {
                 id
+                name
+                description
             }
         }
     }
@@ -39,7 +44,7 @@ const DELETE_TASK_MUTATION = gql`
 
 class Task extends Component {
     state = {
-        showEdit: false
+        showEdit: false,
     }
 
     toggleEdit = () => {
@@ -64,7 +69,6 @@ class Task extends Component {
                                                 if(deleteLoading) return <p>Loading...</p>;
                                                 return <SickButton onClick={()=>{
                                                     deleteTask();
-                                                    console.log(task.goal.id);
                                                     Router.push({
                                                         pathname: "/goal",
                                                         query: {id: task.goal.id}
@@ -87,7 +91,22 @@ class Task extends Component {
                                     { !!this.state.showEdit && <UpdateTask task={task}/>}
                                 </div>
                                 <div>
-                                    <h4> Subtasks <AddButton>+</AddButton></h4>
+                                    <FlexCenterAlign>
+                                        <h4> Subtasks </h4>
+                                        <FormDialog>
+                                            <AddSubtask taskId={task.id}/>
+                                        </FormDialog>
+                                    </FlexCenterAlign>
+                                    
+                                    <ul>
+                                        {task.subtasks.map((subtask)=>{
+                                            return (<li key={subtask.id}>
+                                                <span>{subtask.name}</span>
+                                                <span>{subtask.description}</span>
+                                                <span>PUT CHECK BBOX HERE</span>
+                                            </li>)
+                                        })}
+                                    </ul>
                                 </div>
                             </div> 
                         ) 
@@ -99,3 +118,4 @@ class Task extends Component {
 }
 
 export default Task;
+export { GOAL_TASK_QUERY };
