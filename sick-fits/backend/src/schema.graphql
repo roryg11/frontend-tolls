@@ -16,6 +16,11 @@ type Mutation {
     addToCart(id: ID!): CartItem!
     removeFromCart(id: ID!): CartItem
     createOrder(token: String!): Order!
+    createGoal(name: String, description: String, measurement: Measurement ): Goal!
+    updateGoal(id: ID!, name: String, description: String, measurement: Measurement): Goal!
+    deleteGoal(id: ID!): Goal
+    createTask(name: String, description: String, goalId: ID!): Task!
+    updateTask(id: ID!, name: String, description: String, complete: Boolean, dueDate: DateTime): Task!
 }
 
 type Query {
@@ -24,8 +29,11 @@ type Query {
     itemsConnection: ItemConnection!
     me: User
     users: [User]!
-    order: Order
+    order(id: ID!): Order
     orders: [Order]!
+    goals: [Goal]!
+    goal(id: ID!): Goal
+    task(id: ID!): Task
 }
 
 type User {
@@ -34,4 +42,6 @@ type User {
     name: String!
     permissions: [Permission!]!
     cart: [CartItem!]!
+    orders: [OrderItem]
+    goals: [Goal]!
 }

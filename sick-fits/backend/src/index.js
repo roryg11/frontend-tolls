@@ -6,9 +6,7 @@ const jwt = require("jsonwebtoken");
 const db = require('./db');
 const server = createServer();
 
-// TODO use express middleware to handle cookies(JWT)
 server.express.use(cookieParser());
-// TODO populate current user with JWT
 
 server.express.use((req, res, next)=>{
     // get the toke from the req cookies

@@ -52,7 +52,7 @@ class OrdersList extends Component {
                                 { orders.map((order)=>(
                                     <OrderItemStyles key={order.id}>
                                         <Link href={{
-                                            pathname: '/order',
+                                            pathname: '/orderPage',
                                             query: {id: order.id}
                                         }}>
                                             <a>

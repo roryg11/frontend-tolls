@@ -1,10 +1,13 @@
     import React, { Component } from 'react';
+    import Link from "next/link";
+    import Head from "next/head";
     import PaginationStyles from "./styles/PaginationStyles";
     import { Query } from "react-apollo";
     import gql from "graphql-tag";
     import { perPage } from "../config.js" 
-    import Link from "next/link";
-    import Head from "next/head";
+    import Error from "./ErrorMessage";
+
+
 
     const PAGINATION_QUERY = gql`
         query PAGINATION_QUERY {
@@ -21,6 +24,7 @@
             return (
                     <Query query={ PAGINATION_QUERY }>
                         { ({data, loading, error})=>{
+                            if(error) return <Error error={error}/>
                             if(loading) return <p>Loading...</p>; 
                             const count = data.itemsConnection.aggregate.count;
                             const pages = Math.ceil(count/perPage);
