@@ -93,9 +93,7 @@ class Task extends Component {
                                 <div>
                                     <FlexCenterAlign>
                                         <h4> Subtasks </h4>
-                                        <FormDialog>
-                                            <AddSubtask taskId={task.id}/>
-                                        </FormDialog>
+                                        <AddSubtask taskId={task.id}/>
                                     </FlexCenterAlign>
                                     
                                     <ul>
