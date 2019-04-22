@@ -72,32 +72,14 @@ const ModalContent = styled.div`
     }
 `
 
+// props should be a open and close 
 class FormDialog extends Component {  
-    state = {
-        isOpen: false,
-        modalButtonTop: 0,
-        modalButtonLeft: 0
-    }
-
-    handleClickOpen = (e) => {
-        const left = e.clientX + 10;
-        console.log(e.clientY, left);
-        this.setState({isOpen: true, modalButtonLeft: left, modalButtonTop: e.clientY});
-    }
-
-    handleClose = () => {
-        this.setState({isOpen: false});
-    }
-
-    // close callback to pass in? would that be the mutation? 
-
     render() {
         return (
                 <div>
-                    <AddButton onClick={this.handleClickOpen}>+</AddButton>
-                    <FadingBackground onClick={this.handleClose}>
+                    <FadingBackground onClick={this.props.closeFn}>
                         <CSSTransition 
-                            in={this.state.isOpen} 
+                            in={this.props.isOpen} 
                             timeout={400}
                             classNames="background-fade"
                             className="background-fade"
@@ -107,7 +89,7 @@ class FormDialog extends Component {
                     </FadingBackground> 
                     <ModalContent top={this.modalButtonTop} left={this.modalButtonLeft}>
                         <CSSTransition
-                            in={this.state.isOpen}
+                            in={this.props.isOpen}
                             timeout={400}
                             classNames="modal-content"
                             className="modal-content"
