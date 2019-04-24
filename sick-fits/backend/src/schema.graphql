@@ -23,6 +23,8 @@ type Mutation {
     updateTask(id: ID!, name: String, description: String, complete: Boolean, dueDate: DateTime): Task!
     deleteTask(id: ID!): Task
     createSubTask(name: String!, description: String, taskId: ID!): SubTask!
+    updateSubTask(id: ID!, complete: Boolean): SubTask!
+    deleteSubTask(id: ID!): SubTask
 }
 
 type Query {

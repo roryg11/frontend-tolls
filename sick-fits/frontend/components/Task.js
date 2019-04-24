@@ -9,6 +9,7 @@ import SickButton from "./styles/SickButton";
 import {FlexCenterAlign} from "./styles/FlexUtilities";
 import FormDialog from "./FormDialog";
 import AddSubtask from "./AddSubtask";
+import SubtaskList from "./SubtaskList";
 
 const GOAL_TASK_QUERY = gql`
     query GOAL_TASK_QUERY (
@@ -95,16 +96,10 @@ class Task extends Component {
                                         <h4> Subtasks </h4>
                                         <AddSubtask taskId={task.id}/>
                                     </FlexCenterAlign>
+                                    {
+                                       task.subtasks && <SubtaskList subtasks={task.subtasks} taskId={task.id}/>
+                                    }
                                     
-                                    <ul>
-                                        {task.subtasks.map((subtask)=>{
-                                            return (<li key={subtask.id}>
-                                                <span>{subtask.name}</span>
-                                                <span>{subtask.description}</span>
-                                                <span>PUT CHECK BBOX HERE</span>
-                                            </li>)
-                                        })}
-                                    </ul>
                                 </div>
                             </div> 
                         ) 
