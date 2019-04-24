@@ -8,7 +8,6 @@ import UpdateTask from "./UpdateTask";
 import SickButton from "./styles/SickButton";
 import {FlexCenterAlign} from "./styles/FlexUtilities";
 import FormDialog from "./FormDialog";
-import AddSubtask from "./AddSubtask";
 import SubtaskList from "./SubtaskList";
 
 const GOAL_TASK_QUERY = gql`
@@ -92,10 +91,6 @@ class Task extends Component {
                                     { !!this.state.showEdit && <UpdateTask task={task}/>}
                                 </div>
                                 <div>
-                                    <FlexCenterAlign>
-                                        <h4> Subtasks </h4>
-                                        <AddSubtask taskId={task.id}/>
-                                    </FlexCenterAlign>
                                     {
                                        task.subtasks && <SubtaskList subtasks={task.subtasks} taskId={task.id}/>
                                     }

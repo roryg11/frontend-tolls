@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { CSSTransition, TransitionGroup} from "react-transition-group";
 import styled from "styled-components";
 import SingleSubtask from "./SingleSubtask";
+import AddSubtask from "./AddSubtask";
+import {FlexCenterBetween} from "./styles/FlexUtilities";
+import {AccentBorderBottom} from "./styles/BorderStyles";
 
 const FadeIn = styled.div`
+    padding: 10px;
     .subtask-enter {
         opacity: 0;
     }
@@ -27,23 +31,32 @@ class subtaskList extends Component {
     render() {
         const {subtasks} = this.props;
         return (
-            <FadeIn>
-                <TransitionGroup>
-                    {subtasks.map((subtask)=>{
-                        return (
-                            
-                                <CSSTransition 
-                                    key={subtask.id}
-                                    unmountOnExit
-                                    className="subtask" 
-                                    classNames="subtask"
-                                    timeout={{enter: 400, exit: 400}}>
-                                    <SingleSubtask subtask={subtask} taskId={this.props.taskId}/>
-                                </CSSTransition>
-                        )
-                    })}
-                </TransitionGroup>  
+            <div>
+                <AccentBorderBottom>
+                    <FlexCenterBetween>
+                        <h3 style={{margin: "5px"}}> Subtasks </h3>
+                        <AddSubtask taskId={this.props.taskId}/>
+                    </FlexCenterBetween>
+                </AccentBorderBottom>      
+                <FadeIn>
+                    <TransitionGroup>
+                        {subtasks.map((subtask)=>{
+                            return (
+                                
+                                    <CSSTransition 
+                                        key={subtask.id}
+                                        unmountOnExit
+                                        className="subtask" 
+                                        classNames="subtask"
+                                        timeout={{enter: 400, exit: 400}}>
+                                        <SingleSubtask subtask={subtask} taskId={this.props.taskId}/>
+                                    </CSSTransition>
+                            )
+                        })}
+                    </TransitionGroup>  
             </FadeIn>
+            </div>
+            
         );
     }
 }
