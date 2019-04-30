@@ -14,15 +14,18 @@ const CREATE_SUBTASK_MUTATION = gql`
         $name: String!
         $description: String
         $taskId: ID!
+        $dueDate: DateTime
     ) {
         createSubTask(
             name: $name
             description: $description
             taskId: $taskId
+            dueDate: $dueDate
         ) {
             id
             name
             description
+            dueDate
         }
     }
 `
@@ -36,7 +39,8 @@ class AddSubtask extends Component {
         isOpen: false,
         taskId: this.props.taskId,
         name: "",
-        description: ""
+        description: "",
+        dueDate: null
     }
 
     handleClickOpen = () => {
@@ -66,11 +70,13 @@ class AddSubtask extends Component {
                                     <Form onSubmit={
                                     async (e)=>{
                                         e.preventDefault();
+                                        const { name, description, dueDate} = this.state; 
                                         const rest = await addSubtask({
                                             variables: {
                                                 taskId: this.props.taskId,
-                                                name: this.state.name,
-                                                description: this.state.description
+                                                name,
+                                                description,
+                                                dueDate
                                             }
                                         });
                                         this.closeFn();
@@ -94,6 +100,14 @@ class AddSubtask extends Component {
                                                 placeholder="How does this help achieve your milestone?"
                                                 required
                                                 value={this.state.description}
+                                                onChange={this.onChange}/>
+                                            </label>
+                                            <label htmlFor="dueDate">
+                                                Due Date
+                                                <input type="date"
+                                                id="dueDate"
+                                                name="dueDate"
+                                                defaultValue={new Date()}
                                                 onChange={this.onChange}/>
                                             </label>
                                             <SickButton type="Submit">Add Subtask</SickButton>

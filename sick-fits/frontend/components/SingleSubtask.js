@@ -3,24 +3,26 @@ import { CSSTransition, TransitionGroup} from "react-transition-group";
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 import styled from "styled-components";
+import {FormattedDate} from "react-intl";
 import {GOAL_TASK_QUERY} from "./Task";
-import { FlexCenterAlign } from "./styles/FlexUtilities";
+import { FlexCenterAlign, Flex } from "./styles/FlexUtilities";
+import {SecondaryText} from "./styles/Text";
 
 const UPDATE_SUBTASK_MUTATION = gql`
     mutation UPDATE_SUBTASK_MUTATION(
         $id: ID!
-        $complete: Boolean
+        $complete: Boolean,
+        $completedAt: DateTime
     ) {
-        updatesubtask(
+        updateSubTask(
             id: $id
-            complete: $complete
+            complete: $complete,
+            completedAt: $completedAt
         ) {
-            subTask {
-                id
-                name
-                description
-                complete
-            }
+            id
+            name
+            description
+            complete
         }
     }
 `
@@ -40,15 +42,6 @@ const Subtask = styled.div`
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px ${props=> props.theme.lightgrey} solid;
-`
-
-// make font atoms with this kind of thing
-const DescriptionText = styled.div`
-    font-family: Lato;
-    font-style: italic;
-    font-size: 15px;
-    color: black; 
-    padding-left: 10px;
 `
 
 const IconButton = styled.span`
@@ -77,7 +70,8 @@ class SingleSubtask extends Component {
         updateTaskMutation({
             variables: {
                 id,
-                complete: checked
+                complete: checked,
+                completedAt: new Date()
             }
         });
     }
@@ -86,14 +80,22 @@ class SingleSubtask extends Component {
         return (
                 <Subtask>
                     <div>
-                        <div>{subtask.name}</div>
-                        <DescriptionText>{subtask.description}</DescriptionText>
+                        <Flex>
+                            {subtask.name} 
+                            { subtask.dueDate && (
+                                <SecondaryText>
+                                    <FormattedDate value={subtask.dueDate}/>
+                                </SecondaryText>
+                            )}
+                            
+                        </Flex>
+                        <SecondaryText>{subtask.description}</SecondaryText>
                     </div>
                     <FlexCenterAlign>
-                        <Mutation mutation={UPDATE_SUBTASK_MUTATION} variables={{id: subtask.id, complete: subtask.complete}}>
-                            { (updateTask, {loading, error})=> {
+                        <Mutation mutation={UPDATE_SUBTASK_MUTATION} variables={{id: subtask.id, complete: subtask.complete}} refetchQueries={[{query: GOAL_TASK_QUERY, variables: {id: this.props.taskId}}]}>
+                            { (updateSubTask, {loading, error})=> {
                                     return (
-                                        <input name="complete" type="checkbox" checked={subtask.complete} onChange={(e)=>this.updateStatus(e, updatesubtask)} id={subtask.id}/>
+                                        <input name="complete" type="checkbox" checked={subtask.complete} onChange={(e)=>this.changeStatus(e, updateSubTask)} id={subtask.id}/>
                                     )
                                 }
                             }

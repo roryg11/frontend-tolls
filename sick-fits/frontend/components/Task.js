@@ -3,12 +3,17 @@ import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import Router from "next/router";
+import { CSSTransition} from "react-transition-group";
+import {FormattedDate} from "react-intl";
 import Error from "./ErrorMessage";
 import UpdateTask from "./UpdateTask";
 import SickButton from "./styles/SickButton";
-import {FlexCenterAlign} from "./styles/FlexUtilities";
+import {FlexCenterAlign, FlexCenterBetween, Flex} from "./styles/FlexUtilities";
 import FormDialog from "./FormDialog";
 import SubtaskList from "./SubtaskList";
+import {FormSlideLeft} from "./styles/Form";
+import {AccentBorderBottom} from "./styles/BorderStyles";
+import {SecondaryText} from "./styles/Text";
 
 const GOAL_TASK_QUERY = gql`
     query GOAL_TASK_QUERY (
@@ -20,6 +25,7 @@ const GOAL_TASK_QUERY = gql`
             description
             goal {
                 id
+                name
             }
             dueDate
             complete
@@ -27,6 +33,8 @@ const GOAL_TASK_QUERY = gql`
                 id
                 name
                 description
+                complete
+                dueDate
             }
         }
     }
@@ -60,35 +68,44 @@ class Task extends Component {
                         const { task } = data; 
                         return (
                             <div>
-                                <div>
-                                    <SickButton onClick={this.toggleEdit}>Edit</SickButton>
-                                    <Mutation mutation={DELETE_TASK_MUTATION} variables={ {id: task.id} }>
-                                        {
-                                            (deleteTask, {deleteError, deleteLoading}) => {
-                                                if(deleteError) return <Error error={deleteError}/>;
-                                                if(deleteLoading) return <p>Loading...</p>;
-                                                return <SickButton onClick={()=>{
-                                                    deleteTask();
-                                                    Router.push({
-                                                        pathname: "/goal",
-                                                        query: {id: task.goal.id}
-                                                    })
-                                                }}>Delete</SickButton>
-                                            }
-                                        }
-                                    </Mutation>
-                                </div>
-                                <div>
-                                    {
-                                        !this.state.showEdit && (
+                                <div style={{overflow:'hidden'}}>
+                                    <AccentBorderBottom >
+                                        <FlexCenterBetween>
+                                            <h3>Milestone to achieve {task.goal.name}</h3>
                                             <div>
-                                                <p>name: {task.name}</p>
-                                                <p>description: {task.description}</p>
+                                                {this.state.showEdit && (
+                                                <Mutation mutation={DELETE_TASK_MUTATION} variables={ {id: task.id} }>
+                                                    {
+                                                        (deleteTask, {deleteError, deleteLoading}) => {
+                                                            if(deleteError) return <Error error={deleteError}/>;
+                                                            if(deleteLoading) return <p>Loading...</p>;
+                                                            return <SickButton onClick={()=>{
+                                                                deleteTask();
+                                                                Router.push({
+                                                                    pathname: "/goal",
+                                                                    query: {id: task.goal.id}
+                                                                })
+                                                            }}>Delete</SickButton>
+                                                        }
+                                                    }
+                                                </Mutation>)}
+                                                <SickButton onClick={this.toggleEdit}>{this.state.showEdit? 'Cancel' : 'Edit'}</SickButton>
                                             </div>
-                                        )
-                                    }
-                                    
-                                    { !!this.state.showEdit && <UpdateTask task={task}/>}
+                                        </FlexCenterBetween>
+                                    </AccentBorderBottom>
+                                    <Flex>
+                                        { !this.state.showEdit && 
+                                            (<div>
+                                            <p>{task.name}</p>
+                                            <SecondaryText>{task.description}</SecondaryText>
+                                            <p>Due Date:<FormattedDate value={task.dueDate}></FormattedDate></p>
+                                            {/* Add in how much has been done, duedate */}
+                                            </div>)
+                                        }
+                                        <FormSlideLeft showing={this.state.showEdit}>
+                                            <UpdateTask task={task}/>
+                                        </FormSlideLeft>  
+                                    </Flex>    
                                 </div>
                                 <div>
                                     {

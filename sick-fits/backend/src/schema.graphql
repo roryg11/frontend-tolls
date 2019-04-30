@@ -22,8 +22,8 @@ type Mutation {
     createTask(name: String, description: String, goalId: ID!): Task!
     updateTask(id: ID!, name: String, description: String, complete: Boolean, dueDate: DateTime): Task!
     deleteTask(id: ID!): Task
-    createSubTask(name: String!, description: String, taskId: ID!): SubTask!
-    updateSubTask(id: ID!, complete: Boolean): SubTask!
+    createSubTask(name: String!, description: String, taskId: ID!, dueDate: DateTime): SubTask!
+    updateSubTask(id: ID!, complete: Boolean, completedAt: DateTime): SubTask!
     deleteSubTask(id: ID!): SubTask
 }
 
@@ -38,6 +38,7 @@ type Query {
     goals: [Goal]!
     goal(id: ID!): Goal
     task(id: ID!): Task
+    subTask(id: ID!): SubTask
 }
 
 type User {

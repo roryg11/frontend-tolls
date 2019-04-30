@@ -66,4 +66,15 @@ const Form = styled.form`
   }
 `;
 
+const FormSlideLeft = styled.div`
+    background-color: white;
+    top: 0;
+    right: 0;
+    width: 100%;
+    transform: translateX(110%);
+    transition: all 0.3s;
+    ${props => props.showing && `transform: translateX(0);`};
+`
+
 export default Form;
+export {FormSlideLeft}

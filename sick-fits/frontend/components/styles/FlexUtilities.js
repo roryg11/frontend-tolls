@@ -17,6 +17,11 @@ const FlexCenterAlign =styled.div`
     align-items: center;
 `
 
+const Flex = styled.div`
+    display: flex;
+`
+
 export default FlexCenter;
 export {FlexCenterBetween};
 export {FlexCenterAlign};
+export {Flex};

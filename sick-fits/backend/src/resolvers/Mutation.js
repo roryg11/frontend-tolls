@@ -456,7 +456,8 @@ const Mutations = {
             throw Error ("You must be logged in to do this!");
         }
 
-        const { name, description } = args;
+        const { name, description, dueDate } = args;
+        console.log(args);
 
         const task = await ctx.db.mutation.createSubTask(
             {
@@ -467,7 +468,8 @@ const Mutations = {
                         }
                     },
                     name,
-                    description
+                    description,
+                    dueDate
                 }
             },
             info
@@ -480,17 +482,18 @@ const Mutations = {
             throw Error ("You must be logged in to do this!");
         }
 
-        const { id, complete } = args;
+        const { id, complete, completedAt } = args;
 
-        const subtask = await ctx.db.mutation.updateSubtask({
+        const subTask = await ctx.db.mutation.updateSubTask({
             data: {
-                complete
+                complete,
+                completedAt
             },
             where: {
                 id
             }
         }, info);
-        return subtask; 
+        return subTask; 
     },
     async deleteSubTask(parent, args, ctx, info){
         if(!ctx.request.userId){

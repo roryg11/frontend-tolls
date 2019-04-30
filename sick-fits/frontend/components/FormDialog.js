@@ -5,7 +5,7 @@ import AddButton from "./styles/AddButton";
 
 const FadingBackground = styled.div`
     .background-fade {
-        background-color: rgba(0, 0, 0, 0.5);
+        /* background-color: rgba(0, 0, 0, 0.5); */
         position: absolute;
         top: 0;
         left: 0;

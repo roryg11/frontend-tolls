@@ -71,6 +71,14 @@ class UpdateTask extends Component {
                                 defaultValue={this.props.task.description}
                                 onChange={this.handleChange}/>
                             </label>
+                            <label htmlFor="dueDate">
+                                Due Date
+                                <input type="date"
+                                id="dueDate"
+                                name="dueDate"
+                                defaultValue={this.props.task.dueDate}
+                                onChange={this.handleChange}/>
+                            </label>
                             <button type="Submit">Submit</button>
                         </fieldset>
                     </Form>
