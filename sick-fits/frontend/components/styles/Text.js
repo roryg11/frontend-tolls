@@ -14,5 +14,11 @@ const PrimaryText = styled.div`
     font-family: Radnika-next;
     font-size: 20px;
 `
-export {SecondaryText}
+
+const PrimaryTextUnderLine = styled.h3`
+    border-bottom: {props=> props.theme.accentColor} solid 3px;
+    margin: 0;
+`
+export {SecondaryText};
+export {PrimaryTextUnderLine};
 export default PrimaryText;

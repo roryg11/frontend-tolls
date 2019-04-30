@@ -8,6 +8,10 @@ import Error from "./ErrorMessage";
 import Title from "./styles/Title";
 import { MEASUREMENTS } from "./CreateGoal";
 import UpdateGoal from "./UpdateGoal";
+import {FormSlideLeft} from "./styles/Form";
+import {Flex, FlexCenterAlign} from "./styles/FlexUtilities";
+import SickButton from "./styles/SickButton";
+import {SecondaryButton, PrimaryButton} from "./styles/Buttons";
 import GoalDetail from "./GoalDetail";
 import AddButton from "./styles/AddButton";
 
@@ -36,80 +40,19 @@ const DELETE_GOAL_MUTATAION = gql`
     }
 `
 
-const FadeIn = styled.div`
-    .goal{
-        transition: all 400ms ease-in;
-        opacity: 0;
-        position: absolute;
-        z-index: 2; 
-        height: 400px;
-    }
-    .goal-enter {
-        opacity: 0;
-        transition: all 4s ease-in;
-    }
-
-    .goal-enter-active {
-        opacity: 1;
-        transition: all 4s ease-in;
-    }
-
-    .goal-exit {
-        opacity: 0;
-        transition: all 4s ease-in;
-    }
-
-    .goal-exit-active {
-        opacity: 0;
-        transition: all 4s ease-in;  
-    }
-`
-
 const OuterGoalContainer = styled.div`
     overflow: hidden;
     height: 400px;
     position: relative;
 `
-const FadeOut = styled.div`  
-    .view{
-        transition: all 400ms ease-in;
-        opacity: 0;
-        position: fixed;
-        height: 400px;
-    }
-    .view-enter {
-        opacity: 0;
-        transition: all 4s ease-in;
-    }
 
-    .view-enter-active {
-        opacity: 1;
-        transition: all 4s ease-in;
-    }
 
-    .view-exit {
-        opacity: 1;
-        transition: all 4s ease-in;
-    }
-
-    .view-exit-active {
-        opacity: 0;
-        transition: all 4s ease-in;  
-    }
-`
-
-// put the delete goal here or in the update goal? 
-
-const GoalHeadline = styled.h2`
+const GoalHeadline = styled.div`
     border-bottom: 3px solid ${props=> props.theme.accentColor};
     text-align: center;
     flex-grow: 1; 
     display: flex;
-`
-
-const Flex = styled.div`
-    display: flex;
-    align-items: center;
+    justify-content: space-between;
 `
 
 class Goal extends Component {
@@ -131,6 +74,10 @@ class Goal extends Component {
         }) }
     } 
 
+    updateCallback = () => {
+        this.switchView();
+    }
+
     render(){
         const {id} = this.props; 
         // export any styles here to goal styles
@@ -146,34 +93,20 @@ class Goal extends Component {
                                     return(
                                         <div>
                                             <Flex>
-                                                <GoalHeadline>{goal.name}</GoalHeadline>
-                                                <button onClick={this.switchView}>Edit</button>
-                                                <button onClick={(e)=> this.deleteGoal(e, deleteGoal)}>Delete</button>
+                                                <GoalHeadline>
+                                                    <h3>{goal.name}</h3>
+                                                    <div>
+                                                        <PrimaryButton theme={this.props.theme}onClick={this.switchView}>Edit</PrimaryButton>
+                                                        <SecondaryButton  theme={this.props.theme} onClick={(e)=> this.deleteGoal(e, deleteGoal)}>Delete</SecondaryButton>  
+                                                    </div>
+                                                </GoalHeadline>
                                             </Flex>
-                                            <OuterGoalContainer>
-                                                <FadeOut>
-                                                    <CSSTransition
-                                                            unmountOnExit
-                                                            in={!this.state.showEdit}
-                                                            classNames="view"
-                                                            className="view"
-                                                            key={`view-${goal.id}`}
-                                                            timeout={{enter: 400, exit:100}}>
-                                                            <GoalDetail className="view" goal={goal}/>
-                                                    </CSSTransition>
-                                                </FadeOut>
-                                                <FadeIn>
-                                                    <CSSTransition
-                                                            unmountOnExit
-                                                            in={!!this.state.showEdit}
-                                                            classNames="goal"
-                                                            className="goal"
-                                                            key={`edit-${goal.id}`}
-                                                            timeout={{enter: 400, exit: 0}}>
-                                                            <UpdateGoal className="goal" goal={goal}/>
-                                                    </CSSTransition>
-                                                </FadeIn>
-                                            </OuterGoalContainer>
+                                            <Flex style={{overflow: "hidden"}}>
+                                                { !this.state.showEdit && (<GoalDetail className="view" goal={goal}/>)} 
+                                                <FormSlideLeft showing={this.state.showEdit}>
+                                                    <UpdateGoal className="goal" goal={goal} updateCb={this.updateCallback}/>
+                                                </FormSlideLeft> 
+                                            </Flex>                
                                             <div>
                                                 <Flex>
                                                     <GoalHeadline>Milestones</GoalHeadline>
@@ -189,7 +122,7 @@ class Goal extends Component {
                                                 <div>
                                                     { goal.tasks.map((task)=>{
                                                         return( 
-                                                        <div>
+                                                        <div key={task.id}>
                                                             <Link
                                                                 href= {{
                                                                     pathname: '/milestone',

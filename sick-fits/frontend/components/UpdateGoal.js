@@ -4,26 +4,30 @@ import gql from "graphql-tag";
 import styled from "styled-components";
 import Form from "./styles/Form";
 import PropTypes from "prop-types";
-import { MEASUREMENTS } from "./CreateGoal";
 import { TransitionGroup, CSSTransition} from "react-transition-group";
+import { MEASUREMENTS } from "./CreateGoal";
+import Error from "./ErrorMessage";
 
 const UPDATE_GOAL_MUTATION = gql`
     mutation UPDATE_GOAL_MUTATION(
         $id: ID!
         $name: String
         $description: String
-        $measurement: Measurement
+        $measurement: Measurement,
+        $dueDate: DateTime
     ) {
         updateGoal(
             id: $id
             name: $name
             description: $description
             measurement: $measurement
+            dueDate: $dueDate
         ){
             id
             name
             description
             measurement
+            dueDate
         }
     }
 `
@@ -56,7 +60,7 @@ class UpdateGoal extends Component {
                         if(loading) return <p>Loading...</p>;
                         return (
                             <Form onSubmit={ (e) => {
-                            this.handleUpdate(e, updateGoal);
+                                this.handleUpdate(e, updateGoal);
                             }}>
                                 <fieldset disabled={loading} aria-busy={loading}>
                                     <label htmlFor="name">
@@ -79,8 +83,16 @@ class UpdateGoal extends Component {
                                         defaultValue={goal.description}
                                         onChange={this.handleChange}/>
                                     </label>
+                                    <label htmlFor="dueDate">
+                                        Due Date
+                                        <input type="date"
+                                        id="dueDate"
+                                        name="dueDate"
+                                        defaultValue={goal.dueDate}
+                                        onChange={this.handleChange}/>
+                                    </label>
                                     <label htmlFor="measurement">
-                                    Measurement - how do you measure your success?
+                                        Measurement - how do you measure your success?
                                     <select onChange={this.handleChange} name="measurement" defaultValue={goal.measurement}>
                                         {
                                             MEASUREMENTS.map((measurement)=>{

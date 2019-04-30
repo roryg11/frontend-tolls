@@ -457,7 +457,6 @@ const Mutations = {
         }
 
         const { name, description, dueDate } = args;
-        console.log(args);
 
         const task = await ctx.db.mutation.createSubTask(
             {

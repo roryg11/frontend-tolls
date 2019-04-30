@@ -12,7 +12,10 @@ const theme = {
     maxWidth: '1000px',
     bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',
     accentColor: '#FF0000',
-    modalDialogIndex: 50
+    modalDialogIndex: 50,
+    smallSpacing: "1.5rem",
+    mediumSpacing: "2rem",
+    largeSpacing: "2.5rem"
 };
 
 const StyledPage = styled.div`
@@ -130,6 +133,9 @@ injectGlobal`
     a {
         text-decoration: none;
         color: ${theme.black};
+    }
+    p {
+        margin: 0
     }
 `
 

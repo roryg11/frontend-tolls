@@ -17,7 +17,7 @@ type Mutation {
     removeFromCart(id: ID!): CartItem
     createOrder(token: String!): Order!
     createGoal(name: String, description: String, measurement: Measurement ): Goal!
-    updateGoal(id: ID!, name: String, description: String, measurement: Measurement): Goal!
+    updateGoal(id: ID!, name: String, description: String, measurement: Measurement, dueDate: DateTime): Goal!
     deleteGoal(id: ID!): Goal
     createTask(name: String, description: String, goalId: ID!): Task!
     updateTask(id: ID!, name: String, description: String, complete: Boolean, dueDate: DateTime): Task!

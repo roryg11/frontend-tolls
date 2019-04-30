@@ -4,6 +4,7 @@ import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import styled from "styled-components";
 import Error from "./ErrorMessage";
+import {PrimaryTextUnderLine, SecondaryText} from "./styles/Text";
 
 const USER_GOALS_QUERY = gql`
     query USER_GOALS_QUERY {
@@ -45,11 +46,11 @@ class GoalsList extends Component {
                                         pathname: "/goal",
                                         query: { id: goal.id },
                                         }}>
-                                        <a>{goal.name}</a>
+                                        <a><PrimaryTextUnderLine theme={this.props.theme}>{goal.name}</PrimaryTextUnderLine></a>
                                     </Link>
-                                    <p>the WHY?</p>
-                                    <p>{goal.description}</p>
-                                    <p>ADD METRICS FOR HOW FAR ALONG YOU ARE</p>
+                                    <p>Why? <SecondaryText>{goal.description}</SecondaryText></p>
+                                    <p>Target Finish Date:</p>
+                                    <p>List of Milestones</p>
                                 </GoalsLI>)
                             })}
                         </GoalUl>);
